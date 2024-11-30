@@ -4,7 +4,6 @@
  */
 
 #include "motor_driver.h"
-#include "defs.h"
 
 /**
  * @brief Constructor initialise the motor's pins
@@ -48,7 +47,7 @@ void Motor::init_motor_pins() {
  * @brief get the motor speed
  */
 int Motor::get_speed() {
-    return this->speed;
+    return speed;
 }
 
 /**
@@ -88,6 +87,27 @@ void Motor::turn_right() {
 }
 
 /**
+ * @brief move forward
+ */
+void Motor::move_forward() {
+    digitalWrite(this->_in1, LOW);
+    digitalWrite(this->_in2, HIGH);
+    digitalWrite(this->_in3, LOW);
+    digitalWrite(this->_in4, HIGH);
+}
+
+/**
+ * @brief reverse
+ */
+void Motor::reverse() {
+    // turn on motor A and B
+    digitalWrite(this->_in1, HIGH);
+    digitalWrite(this->_in2, LOW);
+    digitalWrite(this->_in3, HIGH);
+    digitalWrite(this->_in4, LOW);
+}
+
+/**
  * @brief stop the motor
  */
 void Motor::stop() {
@@ -95,4 +115,22 @@ void Motor::stop() {
     digitalWrite(this->_in2, LOW);
     digitalWrite(this->_in3, LOW);
     digitalWrite(this->_in4, LOW);
+}
+
+/*
+ * @brief Decelerate motor
+ */
+void Motor::decelerate() {
+    int s = this->get_speed();
+
+    // decelerate from speed s to 0
+    for(int i = s; i > 0; i-- ) {
+        analogWrite(this->_ena, i);
+        analogWrite(this->_enb, i);
+        delay(DECEL_DELAY);
+    }
+
+    // turn off the motors after deceleration
+    this->stop();
+
 }

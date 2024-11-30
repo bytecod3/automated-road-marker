@@ -5,6 +5,9 @@
 #ifndef MOTOR_DRIVER
 #define MOTOR_DRIVER
 
+#include <Arduino.h>
+#include "defs.h"
+
 class Motor {
 private:
     uint8_t _ena, _enb, _in1, _in2, _in3, _in4;
@@ -21,7 +24,8 @@ public:
     void move_forward();
     void set_start_speed();
     static int get_speed();
-
+    void accelerate();
+    void decelerate();
 };
 
 
