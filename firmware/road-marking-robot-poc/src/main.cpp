@@ -14,8 +14,6 @@ void setup() {
 
     // init ultrasonic sensors
 
-
-
 }
 
 void loop() {
