@@ -2,7 +2,7 @@
 Automated road marker project
 
 
-## Battery sizing and commponent voltages 
+## Battery sizing and component voltages 
 | Component    | Voltage rating (V) | Current rating
 | -------- | ------- | ------- |
 | Arduino MEGA 2560  | 7-12    | -
