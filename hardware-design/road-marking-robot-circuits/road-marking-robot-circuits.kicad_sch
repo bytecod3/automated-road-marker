@@ -3065,6 +3065,88 @@
 				)
 			)
 		)
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim yes)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
 		(symbol "Motor:Motor_DC"
 			(pin_names
 				(offset 0)
@@ -7122,6 +7204,12 @@
 		(uuid "2e0a360a-2dc9-421f-8af9-b5dd93317b05")
 	)
 	(junction
+		(at 184.15 179.07)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3434afb8-2f6e-4608-81c2-bc19f660b517")
+	)
+	(junction
 		(at 144.78 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7134,6 +7222,12 @@
 		(uuid "49c2df28-21fc-4e04-ba2e-50b42edf0630")
 	)
 	(junction
+		(at 115.57 135.89)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4acc2afa-8ce7-4dad-972f-8b52d9d63d86")
+	)
+	(junction
 		(at 106.68 154.94)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7144,6 +7238,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4ecb52ea-d164-4a0b-bd7c-b03e454b6bcb")
+	)
+	(junction
+		(at 115.57 154.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5acc38e9-b873-4210-8f55-66423f34afa8")
 	)
 	(junction
 		(at 71.12 160.02)
@@ -7170,10 +7270,22 @@
 		(uuid "6ae6e492-8b40-446b-a455-29a477793b9e")
 	)
 	(junction
+		(at 116.84 110.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6d3b04ac-012f-4592-b4ea-d937430ec922")
+	)
+	(junction
 		(at 46.99 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6dfa8451-8bc4-4289-a311-c73ced515e08")
+	)
+	(junction
+		(at 184.15 160.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "799bbc92-3562-40ce-ba42-204a1dc8ce86")
 	)
 	(junction
 		(at 45.72 201.93)
@@ -7204,6 +7316,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a2150942-1f97-46df-81f3-ee9382695fbe")
+	)
+	(junction
+		(at 116.84 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a41bfd99-c82d-4a84-adba-a91a118a47c6")
 	)
 	(junction
 		(at 41.91 34.29)
@@ -7603,6 +7721,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 138.43) (xy 120.65 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1007e4b4-4725-48d2-b63c-e9e3844a63ff")
+	)
+	(wire
+		(pts
 			(xy 93.98 154.94) (xy 83.82 154.94)
 		)
 		(stroke
@@ -7780,6 +7908,16 @@
 			(type default)
 		)
 		(uuid "234e8fec-9fed-4711-b4b6-5cb0aab8d36a")
+	)
+	(wire
+		(pts
+			(xy 153.67 45.72) (xy 160.02 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24b28574-3515-49d4-848e-9e64aad7dd36")
 	)
 	(wire
 		(pts
@@ -8023,6 +8161,16 @@
 	)
 	(wire
 		(pts
+			(xy 116.84 91.44) (xy 120.65 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ee46347-689f-4510-8656-2eb22b231679")
+	)
+	(wire
+		(pts
 			(xy 80.01 34.29) (xy 82.55 34.29)
 		)
 		(stroke
@@ -8090,6 +8238,16 @@
 			(type default)
 		)
 		(uuid "44b2198c-5873-463e-a01b-9dac863ab5fd")
+	)
+	(wire
+		(pts
+			(xy 153.67 43.18) (xy 160.02 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45e0c37b-f31c-48cd-bb89-c29d2c4d9ad2")
 	)
 	(wire
 		(pts
@@ -8343,6 +8501,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 153.67) (xy 120.65 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65006b87-5f56-496b-bca5-c25264586b10")
+	)
+	(wire
+		(pts
 			(xy 226.06 58.42) (xy 234.95 58.42)
 		)
 		(stroke
@@ -8370,6 +8538,16 @@
 			(type default)
 		)
 		(uuid "6aa022f8-8eb8-4200-b3a8-a3ad8311b0ef")
+	)
+	(wire
+		(pts
+			(xy 115.57 135.89) (xy 120.65 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fe28f13-25ea-40fd-ba96-2644c6a08f16")
 	)
 	(wire
 		(pts
@@ -8473,6 +8651,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 162.56) (xy 198.12 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78d4fe6b-3cdf-4437-830d-c688fe928728")
+	)
+	(wire
+		(pts
 			(xy 149.86 22.86) (xy 149.86 40.64)
 		)
 		(stroke
@@ -8563,6 +8751,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 160.02) (xy 198.12 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e969182-d534-4cbf-9de7-7f6b03216892")
+	)
+	(wire
+		(pts
 			(xy 40.64 203.2) (xy 40.64 201.93)
 		)
 		(stroke
@@ -8633,6 +8831,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 179.07) (xy 198.12 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "850932bc-6a56-49f0-9311-0ee47906c115")
+	)
+	(wire
+		(pts
 			(xy 107.95 91.44) (xy 107.95 93.98)
 		)
 		(stroke
@@ -8640,6 +8848,26 @@
 			(type default)
 		)
 		(uuid "85633815-346d-44b1-9080-da2ee0b113be")
+	)
+	(wire
+		(pts
+			(xy 153.67 48.26) (xy 160.02 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85e36c3d-c2e0-4771-93a2-995952b08c0d")
+	)
+	(wire
+		(pts
+			(xy 120.65 109.22) (xy 120.65 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "861195de-9450-4a2c-8124-778041120e54")
 	)
 	(wire
 		(pts
@@ -8820,6 +9048,16 @@
 			(type default)
 		)
 		(uuid "a20a075a-d191-4052-abb3-4a771dcfbe26")
+	)
+	(wire
+		(pts
+			(xy 115.57 154.94) (xy 120.65 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a29bff96-9d63-4d82-b75b-1d37f61bbc87")
 	)
 	(wire
 		(pts
@@ -9083,6 +9321,16 @@
 	)
 	(wire
 		(pts
+			(xy 175.26 195.58) (xy 175.26 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d639bb77-bdb6-4da0-84ce-2dee4934bc8f")
+	)
+	(wire
+		(pts
 			(xy 182.88 185.42) (xy 196.85 185.42)
 		)
 		(stroke
@@ -9140,6 +9388,16 @@
 			(type default)
 		)
 		(uuid "de5c8da9-88a1-46c0-a599-5ae3b7cc5b04")
+	)
+	(wire
+		(pts
+			(xy 198.12 177.8) (xy 198.12 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1208eef-99b7-4bf9-83c4-201f99a59902")
 	)
 	(wire
 		(pts
@@ -9223,6 +9481,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 50.8) (xy 160.02 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e891ee3b-a51f-4efc-90e4-0b8f70982888")
+	)
+	(wire
+		(pts
 			(xy 48.26 96.52) (xy 45.72 96.52)
 		)
 		(stroke
@@ -9260,6 +9528,16 @@
 			(type default)
 		)
 		(uuid "ec2aebbc-fbbd-4404-b2b9-1a0c319a9e52")
+	)
+	(wire
+		(pts
+			(xy 120.65 93.98) (xy 120.65 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edcf2440-4058-4c69-b32d-7560707a3ed6")
 	)
 	(wire
 		(pts
@@ -9380,6 +9658,16 @@
 			(type default)
 		)
 		(uuid "fc87aa50-1455-4a54-b6d2-23559bbff87b")
+	)
+	(wire
+		(pts
+			(xy 116.84 110.49) (xy 120.65 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc9d16d5-399d-42e7-8881-440eca4b6077")
 	)
 	(wire
 		(pts
@@ -9804,24 +10092,24 @@
 		(uuid "59267ce4-e9b8-491e-985e-0bb2a315b5aa")
 	)
 	(label "IN4"
-		(at 243.84 73.66 180)
+		(at 153.67 43.18 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "5de8b4b5-2802-431d-a754-31f30bf65285")
 	)
 	(label "IN2"
-		(at 243.84 78.74 180)
+		(at 153.67 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "5e8226ee-a076-4619-8ce6-fad840158c0e")
 	)
@@ -9914,13 +10202,13 @@
 		(uuid "759a2fee-571e-49c9-a78d-0906d39b8e1c")
 	)
 	(label "IN3"
-		(at 243.84 76.2 180)
+		(at 153.67 45.72 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "7bc22c35-ff1e-42d6-ae4e-de0dead80250")
 	)
@@ -9947,13 +10235,13 @@
 		(uuid "8c5ab4fc-09ac-422a-98b8-cd1ba8c316e1")
 	)
 	(label "IN1"
-		(at 243.84 81.28 180)
+		(at 153.67 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "9b05d29d-2a25-4303-9242-fc609a494e29")
 	)
@@ -10510,7 +10798,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
 			(at 78.74 144.78 0)
 			(effects
 				(font
@@ -11208,7 +11496,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
 			(at 147.32 168.91 0)
 			(effects
 				(font
@@ -11252,7 +11540,7 @@
 	)
 	(symbol
 		(lib_id "power:Earth")
-		(at 175.26 190.5 0)
+		(at 175.26 195.58 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11261,7 +11549,7 @@
 		(fields_autoplaced yes)
 		(uuid "1ab38d7a-b4a1-4777-8766-869db7e14089")
 		(property "Reference" "#PWR034"
-			(at 175.26 196.85 0)
+			(at 175.26 201.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11270,7 +11558,7 @@
 			)
 		)
 		(property "Value" "Earth"
-			(at 175.26 195.58 0)
+			(at 175.26 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11279,7 +11567,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 175.26 190.5 0)
+			(at 175.26 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11288,7 +11576,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 175.26 190.5 0)
+			(at 175.26 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11297,7 +11585,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"Earth\""
-			(at 175.26 190.5 0)
+			(at 175.26 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11597,6 +11885,70 @@
 			(project ""
 				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
 					(reference "K1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 237.49 161.29 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "28e887b9-ca23-44fa-a3c5-078490d66003")
+		(property "Reference" "H4"
+			(at 240.03 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 240.03 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 237.49 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 237.49 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 237.49 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "H4")
 					(unit 1)
 				)
 			)
@@ -12947,7 +13299,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
 			(at 172.72 187.325 0)
 			(effects
 				(font
@@ -13514,7 +13866,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-3_P5.08mm"
 			(at 269.24 53.34 0)
 			(effects
 				(font
@@ -14102,6 +14454,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 237.49 156.21 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7ce04222-4067-407b-9702-f5e4ea2caae2")
+		(property "Reference" "H3"
+			(at 240.03 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 240.03 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 237.49 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 237.49 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 237.49 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:Earth")
 		(at 25.4 52.07 0)
 		(unit 1)
@@ -14246,10 +14662,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8400b0ca-53fb-42f1-a349-8e357f991466")
 		(property "Reference" "D4"
-			(at 118.11 144.78 90)
+			(at 112.522 150.876 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14258,7 +14673,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 118.11 147.32 90)
+			(at 109.22 153.416 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14386,6 +14801,70 @@
 			(project "road-marking-robot-circuits"
 				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
 					(reference "HS4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 220.98 161.29 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "891b61e4-1f92-49df-8fe4-81defc87e56c")
+		(property "Reference" "H2"
+			(at 223.52 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 223.52 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 220.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 220.98 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -14926,6 +15405,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 120.65 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9a7aa875-e9ee-49c9-9355-69b2d309d5d7")
+		(property "Reference" "R5"
+			(at 123.19 103.5049 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R"
+			(at 123.19 107.3149 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 118.872 105.41 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 120.65 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 120.65 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bb762188-0488-43bc-a0bf-ea7a7ed06395")
+		)
+		(pin "2"
+			(uuid "5c8f0eb1-916f-4bdc-8ca8-5eb4bdd7fa57")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 41.91 38.1 90)
 		(unit 1)
@@ -15136,6 +15685,139 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 220.98 156.21 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a3273480-1ceb-4e7d-bcf7-74fa511191ca")
+		(property "Reference" "H1"
+			(at 223.52 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 223.52 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 220.98 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 220.98 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 120.65 142.24 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a85c3f49-246f-42a9-9efa-ed6362eac986")
+		(property "Reference" "D13"
+			(at 122.936 141.478 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ACTIVE?"
+			(at 122.428 144.018 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D3.0mm"
+			(at 120.65 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 120.65 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 120.65 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "67bc0887-6e78-4ad5-825f-bb17e4c27293")
+		)
+		(pin "2"
+			(uuid "7e5fa4a5-065f-478e-a7d5-e6933afd3261")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 99.06 38.1 0)
 		(unit 1)
@@ -15199,6 +15881,76 @@
 			(project "road-marking-robot-circuits"
 				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
 					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 120.65 149.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aa4b9654-69f7-47b6-8681-6f80a9f2d8eb")
+		(property "Reference" "R6"
+			(at 123.19 147.9549 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R"
+			(at 123.19 151.7649 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 118.872 149.86 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 120.65 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 120.65 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0c9bf53d-9514-4271-a7fc-d0f3b403f209")
+		)
+		(pin "2"
+			(uuid "21426f61-b696-4a45-a6fd-f08494181e53")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -16118,6 +16870,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 120.65 97.79 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cb5bb696-3492-4a25-808e-731e46150ce5")
+		(property "Reference" "D12"
+			(at 124.46 97.4724 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ACTIVE?"
+			(at 124.46 100.076 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D3.0mm"
+			(at 120.65 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 120.65 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 120.65 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "10cad77a-9507-4d76-ab64-de985d0fe518")
+		)
+		(pin "2"
+			(uuid "b3a71a76-4bc2-440b-b299-282ca1797478")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "D12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:Earth")
 		(at 251.46 45.72 0)
 		(unit 1)
@@ -16212,7 +17033,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
 			(at 104.14 163.195 0)
 			(effects
 				(font
@@ -16328,6 +17149,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 198.12 166.37 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "da9cc2f6-edaa-42fd-ba36-c1c09d08ccf1")
+		(property "Reference" "D11"
+			(at 201.93 166.0524 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ACTIVE?"
+			(at 201.93 168.656 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_THT:LED_D3.0mm"
+			(at 198.12 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 198.12 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 198.12 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a252ab4c-0d4b-434b-8910-7b7877a97c1b")
+		)
+		(pin "2"
+			(uuid "104f82f0-f42f-4145-91c4-bc6225c98242")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_BJT:BC547")
 		(at 110.49 116.84 0)
 		(mirror y)
@@ -16355,7 +17245,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
 			(at 105.41 118.745 0)
 			(effects
 				(font
@@ -16726,6 +17616,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 198.12 173.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "eeb88ba5-6e8c-4ec2-b758-7f97c0b60386")
+		(property "Reference" "R1"
+			(at 200.66 172.0849 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R"
+			(at 200.66 175.8949 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+			(at 196.342 173.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 198.12 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 198.12 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "96a29e9a-93b1-47d5-b392-1ad03d620433")
+		)
+		(pin "2"
+			(uuid "66ee6f34-997d-4229-a6eb-7aca680d846a")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4001")
 		(at 116.84 101.6 270)
 		(unit 1)
@@ -16733,10 +17693,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "f26d19ad-d587-4469-a1cd-39e835142f67")
 		(property "Reference" "D3"
-			(at 119.38 100.33 90)
+			(at 113.792 97.79 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16745,7 +17704,7 @@
 			)
 		)
 		(property "Value" "1N4001"
-			(at 119.38 102.87 90)
+			(at 114.808 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17005,7 +17964,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
 			(at 80.01 100.33 0)
 			(effects
 				(font
