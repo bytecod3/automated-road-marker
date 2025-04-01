@@ -122,7 +122,22 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="defs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="init_functions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="init_functions.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="read_functions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="read_functions.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

@@ -26,5 +26,7 @@
 #define M1_PWM
 #define M2_PWM
 
+#define BUZZER 
+
 
 #endif //ROAD_MARKING_ROBOT_POC_DEFS_H

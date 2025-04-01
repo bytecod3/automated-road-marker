@@ -8724,7 +8724,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 209.55) (xy 198.12 203.2)
+			(xy 191.77 203.2) (xy 191.77 198.12)
 		)
 		(stroke
 			(width 0)
@@ -9354,16 +9354,6 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 203.2) (xy 210.82 203.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7d0d7741-5824-4730-9463-3efa9a258baa")
-	)
-	(wire
-		(pts
 			(xy 297.18 269.24) (xy 311.15 269.24)
 		)
 		(stroke
@@ -9574,6 +9564,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 201.93) (xy 210.82 203.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b47df07-16cf-4bf7-9299-a56f6fd25472")
+	)
+	(wire
+		(pts
 			(xy 184.15 292.1) (xy 184.15 289.56)
 		)
 		(stroke
@@ -9621,6 +9621,16 @@
 			(type default)
 		)
 		(uuid "9349fc39-c4d7-4306-b345-cb2baf737162")
+	)
+	(wire
+		(pts
+			(xy 198.12 203.2) (xy 198.12 209.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93b48307-3c4c-4d24-a0a3-1d55876bd112")
 	)
 	(wire
 		(pts
@@ -10324,6 +10334,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 203.2) (xy 198.12 203.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f654a168-d35b-41c8-9bab-5599be8dc262")
+	)
+	(wire
+		(pts
 			(xy 232.41 128.27) (xy 234.95 128.27)
 		)
 		(stroke
@@ -10467,7 +10487,7 @@
 	)
 	(text "SOLENOID RELAY\n"
 		(exclude_from_sim no)
-		(at 199.136 200.914 0)
+		(at 184.912 192.278 0)
 		(effects
 			(font
 				(size 2 2)
@@ -10571,16 +10591,6 @@
 			)
 		)
 		(uuid "97f2c159-02ac-4bb6-9624-c7d88f5ee667")
-	)
-	(text "*NO to prevent\nleakage on boot\n"
-		(exclude_from_sim no)
-		(at 203.708 222.504 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "98a435bb-d480-4998-989c-92f74b1a757f")
 	)
 	(text "SPRAY GUN RELAY"
 		(exclude_from_sim no)
@@ -11427,6 +11437,28 @@
 			)
 		)
 	)
+	(global_label "12V_UNREG"
+		(shape input)
+		(at 191.77 198.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "751aaac2-5e99-4f39-afe8-fdd09708e95a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 179.2549 198.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "6V_REG"
 		(shape input)
 		(at 218.44 176.53 0)
@@ -11683,30 +11715,6 @@
 		(uuid "218a2d80-3c38-4cf9-b6a8-bf006a153c04")
 		(property "Netclass" "power"
 			(at 267.3985 346.71 0)
-			(show_name yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-			)
-		)
-	)
-	(netclass_flag ""
-		(length 2.54)
-		(shape dot)
-		(at 200.66 203.2 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2ede0487-e099-4cc3-b79d-b2ca5871b6ef")
-		(property "Netclass" "power"
-			(at 201.3585 200.66 0)
 			(show_name yes)
 			(effects
 				(font
@@ -19524,6 +19532,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:Earth")
+		(at 210.82 201.93 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f046a7ec-f45b-4741-8402-66b8f64d9f72")
+		(property "Reference" "#PWR037"
+			(at 210.82 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Earth"
+			(at 210.82 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 210.82 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 210.82 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"Earth\""
+			(at 210.82 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3a77e59-145a-4982-9dbc-3f5e6c0c5f65")
+		)
+		(instances
+			(project "road-marking-robot-circuits"
+				(path "/95faade6-3887-4eb7-bcc3-fce13ba0f784"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4001")
 		(at 229.87 210.82 270)
 		(unit 1)
@@ -19872,7 +19947,7 @@
 		(dnp no)
 		(uuid "f9b220ab-2cc7-4535-8eab-7fdc1a5caf1c")
 		(property "Reference" "J8"
-			(at 193.675 204.47 0)
+			(at 183.896 204.724 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19880,7 +19955,7 @@
 			)
 		)
 		(property "Value" "2PIN terminal block"
-			(at 191.008 207.01 0)
+			(at 189.484 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
