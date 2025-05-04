@@ -1,5 +1,7 @@
 #include "defines.h"
 #include <Wire.h>
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
 #include "I2Cdev.h"
 /**
  * 
@@ -44,12 +46,15 @@ void deactivate_pump_two();
 /**
  * Motor control functions 
  */
+void init_motor_pins();
 void robot_start();
 void robot_stop();
 void robot_forward();
 void robot_turn_left();
 void robot_turn_right();
 void robot_reverse();
+void robot_set_speed(uint8_t);
+void robot_motor_test();
 void check_straight_line();
 void compute_RTK();
 
@@ -59,8 +64,9 @@ void buzz_non_blocking(uint16_t);
 void onboard_blink_non_blocking();
 void mpu_callibrate();
 void calc_yaw();
+void corr_speed();
 
-
+Adafruit_MPU6050 mpu;
 
 #define MPU_ADDRESS 0x68
 #define MPU6050_RA_GYRO_ZOUT_H 0x47 //z values register adress
@@ -75,25 +81,11 @@ float yaw;
 float yaw_old = 0;
 float gyro_angle_z = 0; // angle variable
 
-void mpu_init() {
-  Wire.begin();
-  Wire.beginTransmission(MPU_ADDRESS);
-  Wire.write(0x6b); // PWR_MNGMT REGISTER 
-  Wire.write(0); // wake up
-  Wire.endTransmission(true);
-
-  delay(2000);
-  debugln("********** straight line *****************");
-
-  mpu_callibrate();
-}
-
-
 // motor control variables
 unsigned long t1 = 0;
 unsigned long t2 = 0;
 
-
+// timing variables
 long int now = 0;
 long int last_millis = 0;
 long int current_millis = 0;
@@ -102,39 +94,91 @@ uint16_t interval = 300;
 boolean buzz_state = LOW;
 boolean user_led_state = LOW;
 
+// motor variables 
+uint8_t motor_speed = 200;
+
+// motor driver functions 
+void init_motor_pins() {
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  // turn off motor - initial state
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+/**
+ * set motor speed
+ */
+void robot_set_speed(uint8_t speed) {
+  analogWrite(ENA, speed); 
+  analogWrite(ENB, speed);
+}
+
+/**
+ * stop robot
+ */
+void robot_stop(){
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+/**
+ * move robot forward
+ */
+void robot_forward() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+
+/**
+ * reverse robot
+ */
+void robot_reverse() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
+/**
+ * test the robot motors
+ */
+void robot_motor_test() {
+  robot_forward();
+  delay(3000);
+  robot_reverse();
+}
+
  /**
   * Other functions
   */
 
-//void buzz_non_blocking(uint16_t j) {
-//  current_millis = millis();
-//  if(current_millis - la;st_millis >= j) {
-//    last_millis = current_millis;
-//    buzz_state = !buzz_state;
-//    digitalWrite(BUZZER, buzz_state);
-//  }
-//}
-
-void setup() {
-  pinMode(BUZZER, OUTPUT);
-  pinMode(USER_LED, OUTPUT);
+/**
+ * non blocking buzz
+ */
+void buzz_non_blocking(uint16_t j) {
+  current_millis = millis();
+  if(current_millis - la;st_millis >= j) {
+    last_millis = current_millis;
+    buzz_state = !buzz_state;
+    digitalWrite(BUZZER, buzz_state);
+  }
 }
 
-
-void loop() {
-
-  //blink_non_blocking(interval);
-  //buzz_non_blocking(interval);
-  t1 = millis();
-  t2 = t1;
-
-//  while(abs(t2-t1) < 2500) {
-//    forward(my_speed);
-//    t2 = millis();
-//  }
-  
-}
-
+/**
+ * non blocking blink
+ */
 void blink_non_blocking(uint16_t i) {
   current_millis = millis();
   if(current_millis - last_millis >= i) {
@@ -152,12 +196,29 @@ void mpu_callibrate() {
   }
 
   gyro_z0 /= times; // compute the mean
+  debug("gyro mean: "); debugln(gyro_z0);
+  
+}
+
+void mpu_init() {
+  if (!mpu.begin()) {
+    Serial.println("Failed to find MPU6050 chip");
+    while (1) {
+      delay(10);
+    }
+  }
+  Serial.println("MPU6050 Found!");
+  mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
+  mpu.setGyroRange(MPU6050_RANGE_250_DEG);
+  mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
+
+  mpu_callibrate();
 }
 
 int16_t get_z_rotation() {
-  uint8_t buffer[14];
-  I2Cdev::readBytes(MPU_ADDRESS, MPU6050_RA_GYRO_ZOUT_H, 2, buffer);
-  return ((int16_t) buffer[0] << 8 | buffer[1]);
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+  return g.gyro.z;
 }
 
 void calc_yaw() {
@@ -167,7 +228,8 @@ void calc_yaw() {
 
   gyro_z = get_z_rotation();
 
-  float angular_z = (gyro_z - gyro_z0) / 131.0 * dt;
+  //float angular_z = (gyro_z - gyro_z0) / 131.0 * dt;
+  float angular_z = (gyro_z - gyro_z0) * dt;
   if(fabs(angular_z) < 0.05) {
     angular_z = 0.00;
   }
@@ -175,4 +237,25 @@ void calc_yaw() {
   gyro_angle_z += angular_z; // return the z axis rotation integral
   yaw = -gyro_angle_z;
   
+}
+
+void corr_speed() {
+  calc_yaw();
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(BUZZER, OUTPUT);
+  pinMode(USER_LED, OUTPUT);
+  mpu_init();
+  init_motor_pins();
+  robot_set_speed(100);
+  robot_motor_test();
+}
+
+
+void loop() {
+  //debugln(get_z_rotation());
+  calc_yaw();
+  debug("Yaw: "); debugln(yaw);
 }
