@@ -125,21 +125,23 @@ void onboard_blink_non_blocking();
   }
   
   void calc_yaw() {
-    unsigned long current_time = millis();
-    dt = (current_time - last_time) / 1000.0;
-    last_time = current_time;
+    unsigned long current_time = millis(); // current time (ms)
+    dt = (current_time - last_time) / 1000.0; // differential time (seconds)
+    last_time = current_time; // last sampling time (ms)
   
     gyro_z = get_z_rotation();
   
-    //float angular_z = (gyro_z - gyro_z0) / 131.0 * dt;
-    float angular_z = (gyro_z - gyro_z0) * dt;
+    float angular_z = (gyro_z - gyro_z0) / 131.0 * dt;
     if(fabs(angular_z) < 0.05) {
       angular_z = 0.00;
     }
   
-    gyro_angle_z += angular_z; // return the z axis rotation integral
+    gyro_angle_z += angular_z; // return the z axis absolute rotation integral
     yaw = -gyro_angle_z;
-    
+
+    // debug
+    debug("GyroZ Value: "); debug(gyro_z); debug(" GyroAngle: "); debugln(gyro_angle_z);
+    delay(100);    
   }
   
   //======================= END OF MPU FUCNTIONS AND VARIABLES ==============
@@ -276,12 +278,11 @@ void setup() {
 
 
 void loop() {
-  //debugln(get_z_rotation());
-//  calc_yaw();
-//  debug("Yaw: "); debugln(yaw);
-  #if MOTOR_ENABLE
-    robot_motor_test();
-  #endif
+  t1 = millis();
+  t2 = t1;
+
+  calc_yaw();
+
   
   blink_non_blocking(300);
 }
