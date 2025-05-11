@@ -2,6 +2,13 @@
 #include <Wire.h>
 #include "I2Cdev.h"
 
+#define USE_LCD 1 // if you are using an LCD, set this line to 1, otherwise set to 0
+
+#if USE_LCD
+  #include <LiquidCrystal_I2C.h>
+  LiquidCrystal_I2C lcd(0x27, 16, 2);
+#endif
+
 #define MOTOR_ENABLE 1 // must be set to 1 for the motors to run
 #define MPU_ENABLE 1  // must be set to 1 for the MPU to be read
 
@@ -85,7 +92,7 @@ void activate_pump_two_relay(uint8_t state) {
   digitalWrite(PUMP_TWO_RELAY_PIN, state);
 }
 
-/**
+/** 
  * Start solenoid valve
  */
 void activate_solenoid_relay(uint8_t state) {
@@ -416,11 +423,102 @@ void blink_non_blocking(uint16_t i) {
   
 }
 
+/**
+ * ======================== FLOW METER =======================
+ */
+
+double flow_rate = 0.0; // this is the value we intend to calculate
+volatile int pulse_count = 0; 
+
+void initialize_flow_meter();
+void flow();
+void measure_flow_rate();
+
+unsigned long previous_flow_time = 0;
+unsigned long current_flow_time = 0;
+unsigned long flow_interval = 1000; // interval to measure flow rate
+uint8_t is_waiting_flow = false;
+
+void initialize_flow_meter() {
+  pinMode(FLOW_PIN, INPUT);
+  digitalWrite(FLOW_PIN, HIGH);
+  attachInterrupt(digitalPinToInterrupt(FLOW_PIN), flow, RISING); 
+}
+
+void flow() {
+  pulse_count++;
+}
+
+void measure_flow_rate() {
+  debug("Pulse count:"); debugln(pulse_count);
+
+  pulse_count = 0;
+
+  current_flow_time = millis();
+  if(current_flow_time - previous_flow_time >= flow_interval) {
+    previous_flow_time = current_flow_time;
+    if(pulse_count != 0){
+
+      // start flow rate conversion
+  
+      // check the flow sensor you are using 
+      // I used FS300A with a flow range of 1-60L/min -> 
+      // converting this gives 60000ml/(60*60)seconds = 16.67 ml per second
+      flow_rate = (pulse_count * 16.67);
+      flow_rate = flow_rate * 60; // ml per second 
+      flow_rate =  flow_rate / 1000; // ml to liters- > giving you Ltrs/min
+    
+      debug("FLOW_RATE: "); debugln(flow_rate);
+
+      #if USE_LCD
+        // display on LCD
+        lcd.clear();
+        lcd.setCursor(1, 0);
+        lcd.print("Flow rate");
+        lcd.setCursor(1,1);
+        lcd.print(flow_rate);
+        lcd.setCursor(8, 1);
+        lcd.print("L/min");
+      #endif
+          
+    }    
+  }
+
+  
+}
+
+ /**
+  * ==========================================================
+  */
+
+#if USE_LCD
+  /**
+   * 
+   * LCD screen 
+   */
+
+   
+   void init_lcd();
+   
+   void init_lcd() {
+    lcd.begin();
+    lcd.clear();
+    lcd.backlight(); 
+
+    // hello message
+    lcd.setCursor(1, 0);
+    lcd.print("Hello, Robot");
+    lcd.setCursor(1,1);
+    lcd.print("Ready");
+   }
+#endif
+
 void setup() {
   Serial.begin(9600);
   pinMode(BUZZER, OUTPUT);
   pinMode(USER_LED, OUTPUT);
   initialize_hardware_pins(); // setup relay pins
+  initialize_flow_meter(); // set up flow meter
 
   #if MPU_ENABLE
     mpu_init();
@@ -435,6 +533,11 @@ void setup() {
   #endif
 
   yaw = 0;
+
+  #if USE_LCD
+    init_lcd();
+  #endif
+  
 }
 
 
@@ -451,5 +554,10 @@ void loop() {
    * Activate the paint system
    */
    paint_sequence();
+
+   /**
+    * Measure the flow rate
+    */
+   measure_flow_rate();
   
 }

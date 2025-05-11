@@ -21,6 +21,7 @@
 #define PUMP_ONE_RELAY_PIN        A13
 #define PUMP_TWO_RELAY_PIN        A10
 #define SOLENOID_VALVE_RELAY_PIN  A14
+#define FLOW_PIN 2 // flow meter pin
 
 
 #endif
