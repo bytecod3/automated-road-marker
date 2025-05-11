@@ -450,10 +450,6 @@ void flow() {
 }
 
 void measure_flow_rate() {
-  debug("Pulse count:"); debugln(pulse_count);
-
-  pulse_count = 0;
-
   current_flow_time = millis();
   if(current_flow_time - previous_flow_time >= flow_interval) {
     previous_flow_time = current_flow_time;
@@ -468,8 +464,6 @@ void measure_flow_rate() {
       flow_rate = flow_rate * 60; // ml per second 
       flow_rate =  flow_rate / 1000; // ml to liters- > giving you Ltrs/min
     
-      debug("FLOW_RATE: "); debugln(flow_rate);
-
       #if USE_LCD
         // display on LCD
         lcd.clear();
@@ -480,8 +474,24 @@ void measure_flow_rate() {
         lcd.setCursor(8, 1);
         lcd.print("L/min");
       #endif
-          
-    }    
+
+      // reset pulse counter
+      pulse_count = 0;  
+    } else {
+      flow_rate = 0.0;
+      #if USE_LCD
+        // display on LCD
+        lcd.clear();
+        lcd.setCursor(1, 0);
+        lcd.print("Flow rate");
+        lcd.setCursor(1,1);
+        lcd.print(flow_rate);
+        lcd.setCursor(8, 1);
+        lcd.print("L/min");
+      #endif
+    }
+
+    debug("FLOW_RATE: "); debugln(flow_rate); 
   }
 
   
@@ -548,7 +558,7 @@ void loop() {
    */
   robot_forward(my_speed); // go forward
   
-  debug("YAW: "); debug(yaw); debug(" Right-speed: "); debug(correct_speed_right); debug(" Left-speed: "); debugln(correct_speed_left);
+  //debug("YAW: "); debug(yaw); debug(" Right-speed: "); debug(correct_speed_right); debug(" Left-speed: "); debugln(correct_speed_left);
 
   /**
    * Activate the paint system

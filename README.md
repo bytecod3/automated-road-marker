@@ -15,9 +15,28 @@ Automated road marker project
 Recomended Battery = 12V >2000mAh
 
 ## firmware dependencies
-The following libraries need to intalled in Arduino 
+The following libraries need to installed in Arduino 
 1. LiquidCrystal I2C library by Frank de Brabander
 2. I2Cdev
+
+## Following a straight line 
+The robot follows a heading that is referenced to where it starts. To do this, 
+1. place the robot on the surface you want to paint
+2. press the reset button WHILE THE ROBOT IS STATIONARY! There should be no movements or shaking. 
+3. The robot should follow a straight heading.
+4. To stop the robot, press the ON/OFF button, or disconenct the battery 
+
+5. If using LCD, the screen should show the flow rate.
+
+## Paint system 
+The paint sequence is as follows:
+1. Once the robot is turned on, it paints at intervals of 5 seconds( this can be changed in the 
+code. See code!). This paint sequence produces a dotted line 
+2. Pump 1, pump 2 and solenoid are turned on at the same time.
+3. Flow rate is measured and displayed. 
+4. Process repeats.
+5. You can increase the length of the dotted line by increasing the paint interval. (Again, see code 
+comments for this)
 
 ## ultrasonic designations 
 
