@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include "I2Cdev.h"
 
-#define MOTOR_ENABLE 0 // must be set to 1 for the motors to run
+#define MOTOR_ENABLE 1 // must be set to 1 for the motors to run
 #define MPU_ENABLE 1  // must be set to 1 for the MPU to be read
 /**
  * 
@@ -56,13 +56,14 @@ void onboard_blink_non_blocking();
   void init_motor_pins();
   void robot_start();
   void robot_stop();
-  void robot_forward();
-  void robot_turn_left();
-  void robot_turn_right();
+  void robot_forward(uint8_t speed);
+  void robot_turn_left(uint8_t speed);
+  void robot_turn_right(uint8_t speed);
   void robot_reverse();
   void robot_set_speed(uint8_t);
+  void drive_straight(uint8_t speed);
   void robot_motor_test();
-  void correct_speed();
+  void correct_speed(int my_speed);
   void compute_RTK();
 #endif
 
@@ -76,7 +77,7 @@ void onboard_blink_non_blocking();
   float gyro_z; // raw z register values 
   unsigned long last_time = 0;
   float dt; // differential time 
-  long gyro_z0 = 0; // gyro osffset = mean value 
+  long gyro_z0 = 221; // gyro osffset = mean value - get this value from the callibration process
   float yaw;
   float yaw_old = 0;
   float gyro_angle_z = 0; // angle variable
@@ -96,7 +97,7 @@ void onboard_blink_non_blocking();
     Wire.write(0x6B);
     Wire.write(0); // wake up
     Wire.endTransmission(true);
-    delay(2000);
+    delay(1000);
   }
 
   // callibrate the MPU
@@ -140,8 +141,7 @@ void onboard_blink_non_blocking();
     yaw = -gyro_angle_z;
 
     // debug
-    debug("GyroZ Value: "); debug(gyro_z); debug(" GyroAngle: "); debugln(gyro_angle_z);
-    delay(100);    
+    //debug("GyroZ Value: "); debug(gyro_z); debug("       GyroAngle: "); debugln(gyro_angle_z);    
   }
   
   //======================= END OF MPU FUCNTIONS AND VARIABLES ==============
@@ -161,10 +161,15 @@ uint16_t interval = 300;
 boolean buzz_state = LOW;
 boolean user_led_state = LOW;
 
-// motor variables 
-uint8_t motor_speed = 200;
-
 #if MOTOR_ENABLE // must be set to 1 to run motors
+  
+  // motor variables 
+  uint8_t high_speed = 55;
+  uint8_t low_speed = 20;
+  uint8_t my_speed = 45;
+  uint8_t correct_speed_right;
+  uint8_t correct_speed_left;
+  
   // motor driver functions 
   void init_motor_pins() {
     pinMode(ENA, OUTPUT);
@@ -175,10 +180,10 @@ uint8_t motor_speed = 200;
     pinMode(IN4, OUTPUT);
   
     // turn off motor - initial state
-    digitalWrite(IN1, LOW);
-    digitalWrite(IN2, LOW);
-    digitalWrite(IN3, LOW);
-    digitalWrite(IN4, LOW);
+    //digitalWrite(IN1, LOW);
+    //digitalWrite(IN2, LOW);
+    //digitalWrite(IN3, LOW);
+    //digitalWrite(IN4, LOW);
   }
   
   /**
@@ -187,6 +192,32 @@ uint8_t motor_speed = 200;
   void robot_set_speed(uint8_t speed) {
     analogWrite(ENA, speed); 
     analogWrite(ENB, speed);
+  }
+
+  /**
+   * Turn Left
+   */
+   void robot_left(uint8_t speed) {
+    analogWrite(ENA, speed);
+    digitalWrite(IN1, LOW); // right motor drive forward
+    digitalWrite(IN2, HIGH);
+
+    analogWrite(ENB, speed); 
+    digitalWrite(IN3, HIGH); // reverse left motor, the robot will turn left
+    digitalWrite(IN4, LOW); 
+   }
+
+   /**
+    * Turn Right
+    */
+  void robot_right(uint8_t speed) {
+    analogWrite(ENB, speed);
+    digitalWrite(IN3, LOW); // left motor drive forward
+    digitalWrite(IN4, HIGH);
+
+    analogWrite(ENA, speed); 
+    digitalWrite(IN1, HIGH); // reverse right motor, the robot will turn right
+    digitalWrite(IN2, LOW); 
   }
   
   /**
@@ -202,17 +233,13 @@ uint8_t motor_speed = 200;
   /**
    * move robot forward
    */
-  void robot_forward() {
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-    digitalWrite(IN3, HIGH);
-    digitalWrite(IN4, LOW);
-  }
-  
-  /**
-   * reverse robot
-   */
-  void robot_reverse() {
+  void robot_forward(uint8_t speed) {
+
+    drive_straight(speed);
+
+    analogWrite(ENA, correct_speed_right); // right motor
+    analogWrite(ENB, correct_speed_left); // left motor
+    
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
     digitalWrite(IN3, LOW);
@@ -220,12 +247,54 @@ uint8_t motor_speed = 200;
   }
   
   /**
+   * reverse robot
+   */
+  void robot_reverse() {
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
+  }
+  
+  /**
    * test the robot motors
    */
   void robot_motor_test() {
-    robot_forward();
+    robot_forward(100);
     delay(3000);
     robot_reverse();
+    delay(3000);
+    robot_stop();
+  }
+
+  void correct_speed(int my_speed){
+    calc_yaw();
+    int kp = 10; // Proportional constant 
+    correct_speed_right = my_speed + (yaw - yaw_old) * kp; // maintain speed by speeding up right motor
+    
+    if(correct_speed_right > high_speed) {
+      correct_speed_right = high_speed; // high_speed is the maximum speed of the robot
+    } else if(correct_speed_right < low_speed) {
+      correct_speed_right = low_speed; // low_speed is the minimum speed of the car
+    }
+
+    // if direction changes, correct speed  = my_speed + (yaw_old - yaw) * kp;
+    correct_speed_left = my_speed - (yaw - yaw_old) * kp;
+    if(correct_speed_left > high_speed){
+      correct_speed_left = high_speed;
+    } else if(correct_speed_left < low_speed) {
+      correct_speed_left = low_speed;
+    }
+    
+  }
+
+  void drive_straight(uint8_t speed) {
+    static unsigned long onTime;
+    // to compute corr_speed, the yaw data is acquired at startup, and updated every 10 ms
+    if(millis() - onTime > 10) {
+      correct_speed(speed);
+      onTime = millis();
+    } 
   }
 
 #endif
@@ -271,18 +340,35 @@ void setup() {
   #if MOTOR_ENABLE
     // initialize motor hardware
     init_motor_pins();
-    robot_set_speed(200);
-    robot_motor_test();
+    //robot_set_speed(70);
+    //robot_motor_test();
   #endif
 }
 
 
 void loop() {
+  //=========== GO FOWARD ================
   t1 = millis();
   t2 = t1;
+//  
+//  robot_forward(my_speed); // go forward
+//  t2 = millis();
+//  
+//  // debug speeds
+//  debug("YAW: "); debug(yaw); debug(" Right-speed: "); debug(correct_speed_right); debug(" Left-speed: "); debugln(correct_speed_left);
+//  yaw_old = yaw;
 
-  calc_yaw();
+  //=========== GO REVERSE ================
 
+  //calc_yaw();
+  //debugln(yaw);
+
+  // test left and right procedures 
+  robot_left(55);
+  delay(4000);
+  robot_right(55);
+  delay(4000);
   
   blink_non_blocking(300);
+  
 }
