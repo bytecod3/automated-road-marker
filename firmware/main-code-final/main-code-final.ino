@@ -4,6 +4,17 @@
 
 #define MOTOR_ENABLE 1 // must be set to 1 for the motors to run
 #define MPU_ENABLE 1  // must be set to 1 for the MPU to be read
+
+
+unsigned long paint_interval = 5000; // change this interval to change the length of the line painted
+unsigned long previous_paint_time = 0;
+unsigned long current_paint_time = 0;
+
+// this is the variable used to turn on and off the psint system -> pump1, pump2 and solenoid
+// the activation of the paint system must be non-blocking 
+// so that the robot stays in motion whie painting
+uint8_t paint_system_state = 0; 
+
 /**
  * 
  * states 
@@ -32,22 +43,94 @@ void read_gps_cordinates();
 void get_flow_rate();
 
 /**
- * Relay control functions 
+ * Paint system Relay control functions 
  */
-void activate_solenoid_relay();
-void activate_spray_gun_relay();
-void activate_pump_one_relay();
-void activate_pump_two();
-void deactivate_solenoid_relay();
-void deactivate_spray_gun_relay();
-void deactivate_pump_one_relay();
-void deactivate_pump_two();
+void activate_solenoid_relay(uint8_t state);
+void activate_pump_one_relay(uint8_t state);
+void activate_pump_two_relay(uint8_t state);
+void deactivate_solenoid_relay(uint8_t state);
+void deactivate_pump_one_relay(uint8_t state);
+void deactivate_pump_two_relay(uint8_t state);
 
 void initialize_hardware_pins();
 void blink_non_blocking(uint16_t);
 void buzz_non_blocking(uint16_t);
 void onboard_blink_non_blocking();
 
+/**
+ * set pinmodes
+ */
+void initialize_hardware_pins() {
+  pinMode(PUMP_ONE_RELAY_PIN, OUTPUT);
+  pinMode(PUMP_TWO_RELAY_PIN, OUTPUT);
+  pinMode(SOLENOID_VALVE_RELAY_PIN, OUTPUT);
+}
+
+/**
+ * Control the paint sequence
+ */
+void paint_sequence(); 
+
+/**
+ * Start pump 1
+ */
+void activate_pump_one_relay(uint8_t state) {
+  digitalWrite(PUMP_ONE_RELAY_PIN, state);
+}
+
+/**
+ * Start pump 2
+ */
+void activate_pump_two_relay(uint8_t state) {
+  digitalWrite(PUMP_TWO_RELAY_PIN, state);
+}
+
+/**
+ * Start solenoid valve
+ */
+void activate_solenoid_relay(uint8_t state) {
+  digitalWrite(SOLENOID_VALVE_RELAY_PIN, state);
+}
+
+/**
+ * Start pump 1
+ */
+void deactivate_pump_one_relay(uint8_t state) {
+  digitalWrite(PUMP_ONE_RELAY_PIN, state);
+}
+
+/**
+ * Start pump 2
+ */
+void deactivate_pump_two_relay(uint8_t state) {
+  digitalWrite(PUMP_ONE_RELAY_PIN, state);
+}
+
+/**
+ * Start solenoid valve
+ */
+void deactivate_solenoid_relay(uint8_t state) {
+  digitalWrite(SOLENOID_VALVE_RELAY_PIN, state);
+}
+
+/**
+ * Package the paint sequence
+ * This function draws a dotted line after every PAINT_INTERVAL seconds
+ * To change the length of the paint interval, adjust the paint_interval variable
+ */
+ void paint_sequence() {
+  current_paint_time = millis();
+  if((current_paint_time - previous_paint_time) > paint_interval) {
+    previous_paint_time = current_paint_time;
+    paint_system_state = !paint_system_state; // after every paint_interval, the systems will turn ON, paint, then turn OFF
+
+    // activate the paint system 
+    activate_pump_one_relay(paint_system_state);
+    activate_pump_two_relay(paint_system_state);
+    activate_solenoid_relay(paint_system_state);
+   
+  }
+ }
 
 #if MOTOR_ENABLE 
 /**
@@ -162,11 +245,15 @@ boolean buzz_state = LOW;
 boolean user_led_state = LOW;
 
 #if MOTOR_ENABLE // must be set to 1 to run motors
-  
-  // motor variables 
-  uint8_t high_speed = 55;
+ 
+  // Adjust these speeds based on the weight of the robot
+  // high speed is the max speed the robot will run at 
+  // low speed is the minimum speed the robot will run at 
+  // my_speed is the normal operation speed the robot should run at
+  uint8_t high_speed = 54;  
   uint8_t low_speed = 20;
   uint8_t my_speed = 45;
+  
   uint8_t correct_speed_right;
   uint8_t correct_speed_left;
   
@@ -269,8 +356,10 @@ boolean user_led_state = LOW;
 
   void correct_speed(int my_speed){
     calc_yaw();
-    int kp = 10; // Proportional constant 
-    correct_speed_right = my_speed + (yaw - yaw_old) * kp; // maintain speed by speeding up right motor
+    int kp = 5; // Proportional constant 
+    int error = yaw;
+    correct_speed_right = my_speed + (error * kp); // maintain speed by speeding up right motor
+    correct_speed_left = my_speed - (error * kp);
     
     if(correct_speed_right > high_speed) {
       correct_speed_right = high_speed; // high_speed is the maximum speed of the robot
@@ -278,8 +367,7 @@ boolean user_led_state = LOW;
       correct_speed_right = low_speed; // low_speed is the minimum speed of the car
     }
 
-    // if direction changes, correct speed  = my_speed + (yaw_old - yaw) * kp;
-    correct_speed_left = my_speed - (yaw - yaw_old) * kp;
+    // if direction changes, 
     if(correct_speed_left > high_speed){
       correct_speed_left = high_speed;
     } else if(correct_speed_left < low_speed) {
@@ -325,12 +413,14 @@ void blink_non_blocking(uint16_t i) {
     user_led_state = !user_led_state;
     digitalWrite(USER_LED, user_led_state);
   }
+  
 }
 
 void setup() {
   Serial.begin(9600);
   pinMode(BUZZER, OUTPUT);
   pinMode(USER_LED, OUTPUT);
+  initialize_hardware_pins(); // setup relay pins
 
   #if MPU_ENABLE
     mpu_init();
@@ -343,32 +433,23 @@ void setup() {
     //robot_set_speed(70);
     //robot_motor_test();
   #endif
+
+  yaw = 0;
 }
 
 
 void loop() {
-  //=========== GO FOWARD ================
-  t1 = millis();
-  t2 = t1;
-//  
-//  robot_forward(my_speed); // go forward
-//  t2 = millis();
-//  
-//  // debug speeds
-//  debug("YAW: "); debug(yaw); debug(" Right-speed: "); debug(correct_speed_right); debug(" Left-speed: "); debugln(correct_speed_left);
-//  yaw_old = yaw;
 
-  //=========== GO REVERSE ================
-
-  //calc_yaw();
-  //debugln(yaw);
-
-  // test left and right procedures 
-  robot_left(55);
-  delay(4000);
-  robot_right(55);
-  delay(4000);
+  /**
+   * start moving the robot
+   */
+  robot_forward(my_speed); // go forward
   
-  blink_non_blocking(300);
+  debug("YAW: "); debug(yaw); debug(" Right-speed: "); debug(correct_speed_right); debug(" Left-speed: "); debugln(correct_speed_left);
+
+  /**
+   * Activate the paint system
+   */
+   paint_sequence();
   
 }

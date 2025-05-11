@@ -17,5 +17,10 @@
 #define IN3 16
 #define IN4 17
 
+// paint system pins
+#define PUMP_ONE_RELAY_PIN        A13
+#define PUMP_TWO_RELAY_PIN        A10
+#define SOLENOID_VALVE_RELAY_PIN  A14
+
 
 #endif
